@@ -1,0 +1,19 @@
+@charset "utf-8";
+$family: unquote("Alegreya Sans SC");
+@import url("https://fonts.googleapis.com/css?family=#{$family}");
+
+* { 
+    margin: 0;  
+    padding: 0;
+    box-sizing: border-box;
+}
+ol , ul, li {
+    list-style: none;
+}
+a { 
+    outline: 0;
+    text-decoration: none;
+}
+img {
+    border: 0;
+}

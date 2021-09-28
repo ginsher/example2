@@ -1,0 +1,229 @@
+@charset "utf-8";
+@import 'reset';
+
+main {
+    width: 100%;
+    height: 100vh;
+    background: #333;
+    display: flex;
+
+    header {
+        width: 20%;
+        height: 100%;
+        padding: 10vh 5vw;
+        display: flex;
+        flex-wrap: wrap; /* 세로로 줄 바꿈 되도록 처리 */
+        align-content: space-between; /* 세로축은 상단 하단 양 끝으로 콘텐츠를 배치 */
+        justify-content: center; /* 가로축은 가운데로 배치 */
+        position: relative;
+        z-index: 3; /* section 요소와 aside 팝업 요소보다 위에 배치하기 위해 3을 지정 */
+
+        h1 {
+            font-size: 0; /* 안쪽의 자간과 줄 높이 reset */
+            color: #fff;
+
+            i {
+                font-size: 5vw;
+                margin-bottom: 0.75rem;
+            }
+            span {
+                font: normal 0.8vw/1 "arial";
+            }
+        }
+        address {
+            font: normal 0.55rem/1.2 "arial";
+            color: #888;
+        }
+    }
+
+    nav {
+        position: absolute;
+        top: 10vh;
+        right: 5vw;
+        z-index: 3;
+
+        ul {
+            display: flex;
+            
+            li {
+                a {
+                    font-size: 0.9rem;
+                    color: #bbb;
+                    margin-right: 1.5rem;
+                }
+            }
+        }
+    }
+    section {
+        position: relative;
+        width: 80%;
+        height: 100%;
+        display: flex;
+        padding-top: 7rem;
+        z-index: 1;
+        
+        article {
+            position: relative;
+            flex: 1;
+            padding: 3.5rem 2rem 5rem;
+            opacity: 0.6;
+            transition: flex 1s, opacity 1s;
+            z-index: 1;
+            cursor: pointer;
+
+            &::before {
+               content: "";
+               display: block;
+               width: 80%;
+               height: 95%;
+               background: #444;
+               position: absolute;
+               top: 0;
+               left: -10rem;
+               opacity: 0;
+               transition: 1s; 
+            }
+
+            .inner {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+                position: relative;
+
+                .txt {
+                    width: 100%;
+                    transition: 0.5s;
+
+                    h2 {
+                        font: normal 2vw/1 "Alegreya Sans SC";
+                        color: #fff;
+                        margin-bottom: 2rem;
+                        padding-top: 3.5rem;
+                        transition: 1s;
+
+                        &::after {
+                            content: "";
+                            display: block;
+                            width: 2rem;
+                            height: 0.1rem;
+                            background: #777;
+                            margin-top: 1rem;
+                            transition: 1.5s;
+                        }
+                    }
+
+                    p {
+                        font: 0.7rem/1.4 "arial";
+                        color: #999;
+                    }
+                }
+
+                figure {
+                    width: 100%;
+                    height: 15vh;
+                    background: #777;
+                    transform-origin: left center;
+                    box-shadow: 0.25rem 0.25rem 1.5rem rgba(0,0, 0, 0.3);
+                    position: relative;
+                    overflow: hidden;
+                    filter: saturate(10%);
+                    transition: 1s;
+
+                    video {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            &:hover {
+                flex: 1.5;
+                opacity: 1;
+                z-index: 2;
+
+                &::before{
+                    left: 0;
+                    opacity: 1;
+                }
+
+                .inner {
+                    .txt {
+                        width: 75%;
+                        
+                        h2 {
+                            font-size: 5vw;
+                            padding-top: 0;
+
+                            &::after {
+                                width: 6rem;
+                                background: orange;
+                            }
+                        }
+                    }
+
+                    figure {
+                        height: 25vh;
+                        filter: saturate(120%);
+                        transform: translateY(3vh);
+                    }
+                }
+            }
+        }
+    }
+
+    aside {
+        width: 100%;
+        height: 100vh;
+        background: #222;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        opacity: 0;
+        z-index: 2;
+        box-sizing: border-box;
+        padding: 20vh 7vw 14vh 20vw;
+        display: flex;
+        justify-content: space-between;
+        transition: 1s;
+
+        &.on {
+            opacity: 1;
+            left: 0;    
+        }
+
+        .txt {
+            width: 25%;
+            height: 100%;
+
+            h1 {
+                font: normal 6vw/1 "Alegreya Sans SC";
+                color: #ddd;
+                margin-bottom: 1rem;
+            }
+            p {
+                font: 1.1vw/1.3 "arial";
+                color: #666;
+                margin-bottom: 3rem;
+            }
+            span {
+                cursor: pointer;
+                color: orange;
+            }
+        }
+
+        figure {
+            width: 72%;
+            height: 100%;
+
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
